@@ -10,6 +10,10 @@ import {StatusBar} from 'react-native';
 
 import RootNavigator from './src/Navigation/Root';
 
+import {
+  withAuthenticator,
+  useAuthenticator
+} from '@aws-amplify/ui-react-native';
 
 const App = ()=>{
 
@@ -22,4 +26,4 @@ const App = ()=>{
 }
  
 
-export default App;
+export default withAuthenticator(App);

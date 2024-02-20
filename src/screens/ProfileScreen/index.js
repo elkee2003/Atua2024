@@ -5,11 +5,20 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import styles from './styles'
 // import { useAuthContext } from '../../contexts/AuthContext'
 import { useNavigation } from '@react-navigation/native'
+import { signOut } from 'aws-amplify/auth';
 
 
 const ProfileScreen = () => {
 
   // const {sub, dbUser, setDbUser} = useAuthContext()
+
+  const handleSignOut = async()=> {
+    try {
+      await signOut();
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  }
   
     const [name, setName] = useState("")
     const [address, setAddress] = useState( "")
@@ -161,7 +170,7 @@ const ProfileScreen = () => {
         </Pressable>
         
         {/* SignOut */}
-        <Pressable >
+        <Pressable onPress={handleSignOut} >
           <Text style={styles.signOut}>
             Sign out
           </Text>

@@ -4,9 +4,18 @@ import { DrawerContentScrollView, DrawerItemList, } from '@react-navigation/draw
 // import { Auth } from 'aws-amplify';
 import styles from './styles';
 // import { useAuthContext } from '../contexts/AuthContext';
+import { signOut } from 'aws-amplify/auth';
 
 const CustomDrawer = (props) => {
   // const {dbUser} = useAuthContext()
+
+  const handleSignOut = async()=> {
+    try {
+      await signOut();
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  }
 
   return (
     <DrawerContentScrollView {...props}>
@@ -48,7 +57,7 @@ const CustomDrawer = (props) => {
       <DrawerItemList {...props}/>
 
             {/* logout */}
-      <Pressable onPress={()=>{Auth.signOut()}}>
+      <Pressable onPress={handleSignOut}>
         <Text style={styles.logOut}>
                 Logout
         </Text>

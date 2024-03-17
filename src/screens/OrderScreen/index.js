@@ -1,26 +1,20 @@
 import { View, Text, TextInput, Pressable, ScrollView, TouchableWithoutFeedback,Keyboard, Alert } from 'react-native'
 import React,{useState,} from 'react'
 import styles from './styles'
-import ReviewOrderDetails from '../../components/ReviewOrderDetails'
 import { useOrderContext } from '../../contexts/OrderContext'
 import { useNavigation } from '@react-navigation/native'
 
 const OrderScreen = () => {
-    const [isShowModal, setIsShowModal]= useState(false)
-    // Starting of what I'll delete
-    const [recipientName, setRecipientName]= useState('')
-    const [recipientNumber, setRecipientNumber]= useState('')
-    const [orderDetails, setOrderDetails]= useState('')
 
-    const dismissKeyboard = () => {
-          Keyboard.dismiss();
-        };
+    // const dismissKeyboard = () => {
+    //       Keyboard.dismiss();
+    //     };
 
-    // const {recipientName, recipientNumber, orderDetails, setRecipientName, setRecipientNumber, setOrderDetails, orders, setOrders,} = useOrderContext()
+    const {recipientName, recipientNumber, orderDetails, setRecipientName, setRecipientNumber, setOrderDetails, orders, setOrders,} = useOrderContext()
 
     const navigation = useNavigation()
 
-    const goToReviewOrderDetails = ()=>{
+    const goToReviewOrder = ()=>{
         if(recipientName && recipientNumber.length >= 11){
             navigation.navigate('SearchResults')
         }else{
@@ -28,26 +22,21 @@ const OrderScreen = () => {
         }
     }
 
-    const changeSetIsShowModalToFalse =()=>{
-      setIsShowModal(false)
-    }
-
-
   return (
       <TouchableWithoutFeedback>
           <View style={styles.container}>
-            <Text style={styles.header}>Package Details:</Text>
+            <Text style={styles.header}>Recipient / Package Details:</Text>
             <TextInput
             style={styles.input}
             value={recipientName}
-            onChangeText={setRecipientName}
+            onChangeText={(text)=>setRecipientName(text)}
             multiline
             placeholder='Sending to eg: Opus'
             />
             <TextInput
             style={styles.input}
             value={recipientNumber}
-            onChangeText={setRecipientNumber}
+            onChangeText={(text)=>setRecipientNumber(text)}
             multiline
             placeholder='eg: 08030000000'
             keyboardType='number-pad'
@@ -55,28 +44,17 @@ const OrderScreen = () => {
             <TextInput
             style={styles.description}
             value={orderDetails}
-            onChangeText={setOrderDetails}
+            onChangeText={(text)=>setOrderDetails(text)}
             multiline
             placeholder='eg: Letter, Food, Clothes, Breakable Items etc. You can also drop a short note. Kindly make it as short as possible'
             />
             <Pressable 
-            onPress={goToReviewOrderDetails}
+            onPress={goToReviewOrder}
             style={styles.btn}>
                 <Text style={styles.btnTxt}>
                     Done
                 </Text>
             </Pressable>
-            {isShowModal && 
-            <ReviewOrderDetails
-            // recipientNameD={recipientName}
-            // recipientNumberD={recipientNumber}
-            // orderDetailsD={orderDetails}
-            changeSetIsShowModalToFalse={changeSetIsShowModalToFalse}
-            // setRecipientName={setRecipientName}
-            // setRecipientNumber={setRecipientNumber}
-            // setOrderDetails={setOrderDetails}
-            />
-            }
           </View>
       </TouchableWithoutFeedback>
   )

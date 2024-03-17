@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     confirmBtn:{
-        backgroundColor:'blue',
+        backgroundColor:'#2c5c00',
         padding: 10,
         justifyContent: 'center',
         alignItems:'center',

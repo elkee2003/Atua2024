@@ -3,11 +3,11 @@ import React from 'react'
 import { DrawerContentScrollView, DrawerItemList, } from '@react-navigation/drawer';
 // import { Auth } from 'aws-amplify';
 import styles from './styles';
-// import { useAuthContext } from '../contexts/AuthContext';
+import { useAuthContext } from '../contexts/AuthContext';
 import { signOut } from 'aws-amplify/auth';
 
 const CustomDrawer = (props) => {
-  // const {dbUser} = useAuthContext()
+  const {dbUser} = useAuthContext()
 
   const handleSignOut = async()=> {
     try {
@@ -25,7 +25,7 @@ const CustomDrawer = (props) => {
           <View style={styles.userRow}>
             <View style={styles.userImage}/>
             <View>
-                <Text style={styles.userProfile}>dbUser?.name</Text>
+                <Text style={styles.userProfile}>{dbUser?.name}</Text>
                 <Text style={styles.userRate}>5.00 *</Text>
             </View>
         </View>

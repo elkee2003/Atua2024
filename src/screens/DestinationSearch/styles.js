@@ -64,6 +64,24 @@ const styles = StyleSheet.create({
         top:80,
         left:15,
     },
+    topButton:{
+        position: 'absolute',
+        top:19,
+        right:4,
+        zIndex:2,
+        color:'#928f8f'
+        // justifyContent: 'center', 
+        // alignItems: 'center', 
+        // marginLeft: 10 
+    },
+    bottomButton:{
+        position: 'absolute',
+        top:17,
+        right:4,
+        // justifyContent: 'center', 
+        // alignItems: 'center', 
+        // marginLeft: 10 
+    },
     gPoweredContainer:{
         display:'none'
     }

@@ -3,13 +3,14 @@ import React from 'react'
 
 import styles from './styles'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { useNavigation } from '@react-navigation/native'
+import { useAuthContext } from '../../contexts/AuthContext'
 
 const HomeSearch = () => {
 
+  const {dbUser} = useAuthContext()
   const navigation = useNavigation()
 
   const goToDestinationSearch = ()=>{
@@ -24,7 +25,7 @@ const HomeSearch = () => {
         <Text style={styles.inputText}>Send To What Location?
         </Text>
         <View style={styles.orderContainer}>
-           <MaterialCommunityIcons name={'card-account-details'} size={30}/>
+           <FontAwesome5 name={'search-location'} size={30}/>
         </View>
       </Pressable>
 
@@ -33,7 +34,7 @@ const HomeSearch = () => {
         <View style={styles.iconContainer}>
         <AntDesign name={'clockcircle'} size={16} color={'#535353'}/>
         </View>
-        <Text style={styles.destinationText }>Funiture House Trans Amadi</Text>
+        <Text style={styles.destinationText }>Trans Amadi Port Harcourt</Text>
       </View>
 
       {/* home destination */}
@@ -41,7 +42,7 @@ const HomeSearch = () => {
         <View style={[styles.iconContainer,{backgroundColor:'#218cff'}]}>
         <Entypo name={'home'} size={16} color={'#535353'}/>
         </View>
-        <Text style={styles.destinationText }>Amadi Flats</Text>
+        <Text style={styles.destinationText }>{dbUser ? dbUser?.address : 'Home Address'}</Text>
       </View>
     </View>
   )

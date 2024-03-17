@@ -1,16 +1,25 @@
 import React from 'react'
-import { View, Text, } from 'react-native'
+import { View, Text, TouchableOpacity, } from 'react-native'
 import HomeNavigator from './Home';
 import ProfileScreen from '../screens/ProfileScreen';
 import OrderListScreen from '../screens/OrderListScreen';
 import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from './CustomDrawer';
-// import AuthContextProvider from '../contexts/AuthContext';
-// import OrderContextProvider from '../contexts/OrderContext';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import AuthContextProvider from '../contexts/AuthContext';
+import OrderContextProvider from '../contexts/OrderContext';
 import LocationContextProvider from '../contexts/LocationContext';
 
 const Drawer = createDrawerNavigator();
+
+const CustomDrawerButton = ({onPress})=>{
+  return (
+    <TouchableOpacity onPress={onPress} style={{marginLeft:15}}>
+      <FontAwesome name='navicon' size={60} color='black'/>
+    </TouchableOpacity>
+  );
+}
 
 const DummyScreen = (props)=>{
   <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
@@ -25,14 +34,20 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
 
-      {/* <AuthContextProvider>
-        <OrderContextProvider> */}
+      <AuthContextProvider>
+        <OrderContextProvider>
           <LocationContextProvider>
             <Drawer.Navigator
-              drawerContent={(props)=><CustomDrawer {...props}/>} 
-              screenOptions={{headerShown:false}} >
+              drawerContent={(props)=><CustomDrawer {...props}/>}
+              edgeWidth={500} 
+              screenOptions={{headerShown:false}} 
+            >
               
-              <Drawer.Screen name='Home' component=   {HomeNavigator}/> 
+              <Drawer.Screen name='Home' component= {HomeNavigator}
+              options={({ navigation }) => ({
+                headerLeft: () => <CustomDrawerButton onPress={() => navigation.openDrawer()} />,
+              })}
+              /> 
               
               <Drawer.Screen name="Profile" component={ProfileScreen}/>
 
@@ -51,8 +66,8 @@ const RootNavigator = () => {
 
             </Drawer.Navigator>
           </LocationContextProvider>
-        {/* </OrderContextProvider>
-      </AuthContextProvider> */}
+        </OrderContextProvider>
+      </AuthContextProvider>
 
     </NavigationContainer>
   )

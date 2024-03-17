@@ -1,6 +1,8 @@
-import { View, SafeAreaView, TextInput} from 'react-native'
-import React, { useState, useEffect, } from 'react'
+import { View, SafeAreaView, TextInput,} from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './styles'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlaceRow from './placeRow';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from '@react-navigation/native';
@@ -23,6 +25,8 @@ const DestinationSearch = () => {
     const {originPlace, destinationPlace, setOriginPlace, setDestinationPlace} = useLocationContext()
 
     const navigation = useNavigation();
+    const originAutocompleteRef = useRef(null);
+    const destinationAutocompleteRef = useRef(null);
 
     useEffect(()=>{
       if(originPlace && destinationPlace){
@@ -33,16 +37,45 @@ const DestinationSearch = () => {
       }
     },[originPlace, destinationPlace])
 
+    const clearOriginInput = () => {
+      if (originAutocompleteRef.current) {
+        originAutocompleteRef.current.setAddressText('');
+      }
+    };
+  
+    const clearDestinationInput = () => {
+      if (destinationAutocompleteRef.current) {
+        destinationAutocompleteRef.current.setAddressText('');
+      }
+    };
+
+    const renderTopButton = () => (
+      <View style={styles.topButton}>
+        <AntDesign name="closecircle" size={20} color='#928f8f' onPress={clearOriginInput} />
+      </View>
+    );
+
+    const renderBottomButton = () => (
+      <View style={styles.bottomButton}>
+        <AntDesign name="closecircle" size={20} color='#928f8f' onPress={clearDestinationInput} />
+      </View>
+    );
+
+
+
   return (
       <SafeAreaView>
           <View style={styles.container}>
               
           <GooglePlacesAutocomplete 
                     placeholder='From?'
+                    ref={originAutocompleteRef}
                     onPress={(data, details = null) => {
                       setOriginPlace({data, details})
                       
                     }}
+                    // renderLeftButton={renderRightButton}
+                    renderLeftButton={renderTopButton}
                     enablePoweredByContainer={false}
                     suppressDefaultStyles
                     currentLocation={true}
@@ -68,10 +101,12 @@ const DestinationSearch = () => {
 
               <GooglePlacesAutocomplete 
                     placeholder='Send to?'
+                    ref={destinationAutocompleteRef}
                     onPress={(data, details = null) => {
                       setDestinationPlace({data, details})
                       
                     }}
+                    renderRightButton={renderBottomButton}
                     enablePoweredByContainer={false}
                     suppressDefaultStyles
                     styles={{

@@ -27,4 +27,11 @@ export default [
     longitude: -16.258658,
     heading: 30,
   },
+  {
+    id: '4',
+    type: 'Group',
+    latitude: 30.454812,
+    longitude: -17.258658,
+    heading: 30,
+  },
 ];

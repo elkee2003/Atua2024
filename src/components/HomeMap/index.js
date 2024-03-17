@@ -31,7 +31,6 @@ const HomeMap = () => {
   
         Geolocation.getCurrentPosition(
           (position) => {
-            console.log(position)
             const {latitude, longitude}=position.coords;
             setMyPosition({latitude,longitude})
           },

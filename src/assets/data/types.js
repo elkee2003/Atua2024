@@ -1,20 +1,18 @@
 export default [
   {
     id: '0',
-    type: 'Walk',
-    price: 1000,
-    duration: 45,
+    type: 'WALK',
   },
   {
     id: '1',
-    type: 'Bike',
-    price: 1500,
-    duration: 30,
+    type: 'BIKE',
   },
   {
     id: '2',
-    type: 'Car',
-    price: 2500,
-    duration: 27,
+    type: 'CAR',
+  },
+  {
+    id: '3',
+    type: 'GROUP',
   },
 ]

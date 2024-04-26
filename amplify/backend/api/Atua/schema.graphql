@@ -1,0 +1,39 @@
+enum AtuaType {
+  WALK
+  BIKE
+  CAR
+  GROUP
+}
+
+enum OrderStatus {
+  READY_FOR_PICKUP
+  ACCEPTED
+  PICKEDUP
+  DELIVERED
+}
+
+type Order @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  recipientName: String!
+  recipientNumber: String!
+  orderDetails: String
+  total: Float
+  originPlace: String
+  destinationPlace: String
+  atuaType: AtuaType
+  status: OrderStatus
+  userID: ID! @index(name: "byUser")
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sub: String!
+  name: String
+  phoneNumber: String
+  address: String
+  lng: Float
+  lat: Float
+  Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
+  type: AtuaType
+}
+ 

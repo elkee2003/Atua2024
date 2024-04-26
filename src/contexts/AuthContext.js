@@ -67,7 +67,7 @@ const AuthContextProvider = ({children})=>{
             }).catch((error) => {
                 console.log('Error fetching dbUser:', error);
             });
-            console.log('see sub and dbuser:', sub,'dbusernkor:', dbUser)
+            console.log('Show sub:', sub,'Show dbuser:', dbUser)
         }
     }, [sub]);
 

@@ -28,6 +28,8 @@ const ProfileScreen = () => {
     const [lat, setLat] = useState(dbUser?.lat.toString() || "0")
     const [lng, setLng] = useState (dbUser?.lng.toString() || "0") 
     
+    const [phoneNumberError, setPhoneNumberError] = useState('')
+    
     const [isFocused, setIsFocused] = useState(false);
    
     const navigation = useNavigation()
@@ -68,12 +70,20 @@ const ProfileScreen = () => {
 
     // Function to Save Data
     const onSave= async()=>{
+      if(phoneNumber.length < 11){
+        setPhoneNumberError('Phone number must be at least 11 characters.')
+        return; 
+        // the return stop it from either creating a user or updating a user, in other words, it stop the other if statements if the requirements are not met. Note that if you add else without the return, it will still create or update user while still showing the message.
+      }else{
+        setPhoneNumberError('')
+      }
+
       if(dbUser){
         await updateUser()
         navigation.goBack()
       }else{
         await createUser()
-        navigation.navigate('HomeScreen')
+        navigation.navigate('OrderScreen')
       }
       // navigation.goBack()
     }
@@ -150,6 +160,9 @@ const ProfileScreen = () => {
       placeholder='Phone Number'
       style={styles.input}
       />
+      {phoneNumberError ? (
+        <Text style={styles.error}>{phoneNumberError}</Text>
+      ) : null}
 
       <TextInput 
       value={lat}

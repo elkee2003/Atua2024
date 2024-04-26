@@ -22,12 +22,14 @@ const HomeNavigator = () => {
             >
                 {/* If dbUser is defined render HomeScreen : if not render ProfileScreen */}
                 {dbUser ? 
-                <Stack.Screen name='HomeScreen' component={HomeScreen}/> :
+                // <Stack.Screen name='HomeScreen' component={HomeScreen}/>
+                <Stack.Screen name='OrderScreen' component={OrderScreen}/>  
+                :
                 <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>
                 }
 
                 <Stack.Screen name='OrderListScreen' component={OrderListScreen}/>
-                <Stack.Screen name='OrderScreen' component={OrderScreen}/> 
+                {/* <Stack.Screen name='OrderScreen' component={OrderScreen}/>  */}
                 <Stack.Screen name='DestinationSearch' component={DestinationSearch}/>
                 <Stack.Screen name='SearchResults' component={SearchResults}/>
                 <Stack.Screen name='ReviewOrder' component={ReviewOrder}/>

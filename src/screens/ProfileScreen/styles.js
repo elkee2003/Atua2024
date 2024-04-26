@@ -17,6 +17,13 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 5,
       },
+      error:{
+        color:'#d80b0b',
+        fontSize:13,
+        marginTop:-10,
+        marginHorizontal:15,
+        marginBottom:5,
+      },
       saveBackground:{
         alignItems:'center',
         backgroundColor:'#18b403',

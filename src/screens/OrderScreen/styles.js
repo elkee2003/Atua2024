@@ -43,6 +43,12 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:25,
         padding:10
+    },
+    error:{
+        color:'#d80b0b',
+        marginHorizontal:19,
+        marginTop:-13,
+        marginBottom:5,
     }
 })
 

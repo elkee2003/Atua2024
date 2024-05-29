@@ -14,11 +14,11 @@ const ReviewOrderDetails = () => {
 
     const {recipientName, recipientNumber, orderDetails, setRecipientName, setRecipientNumber, setOrderDetails, createOrder} = useOrderContext()
 
-    const {originPlace, destinationPlace,setOriginPlace, setDestinationPlace} = useLocationContext()
+    // const {originPlace, destinationPlace,setOriginPlace, setDestinationPlace} = useLocationContext()
 
     const navigation= useNavigation()
     const route = useRoute()
-    const {selectedType}= route.params
+    // const {selectedType}= route.params
 
     // const {dbUser}= useAuthContext()
 
@@ -54,18 +54,18 @@ const ReviewOrderDetails = () => {
             <Text style={styles.txtTitle}>Details Of Order:{" "}</Text>
             <Text style={styles.txt}>{orderDetails}</Text>
         </View>
-        <View style={styles.txtRow}>
+        {/* <View style={styles.txtRow}>
             <Text style={styles.txtTitle}>Mode Of Delivery:{" "}</Text>
             <Text style={styles.txt}>{selectedType}</Text>
-        </View>
-        <View style={styles.txtRow}>
+        </View> */}
+        {/* <View style={styles.txtRow}>
             <Text style={styles.txtTitle}>From:{" "}</Text>
             <Text style={styles.txt}>{originPlace.data?.description || details?.formatted_address}</Text>
         </View>
         <View style={styles.txtRow}>
             <Text style={styles.txtTitle}>To:{" "}</Text>
             <Text style={styles.txt}>{destinationPlace.data?.description || details?.formatted_address}</Text>
-        </View>
+        </View> */}
         <Pressable
         onPress={createOrder}
         style={styles.btn}>

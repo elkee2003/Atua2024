@@ -4,6 +4,8 @@ import styles from './styles'
 import { useOrderContext } from '../../contexts/OrderContext'
 import { useNavigation } from '@react-navigation/native'
 
+import { useAuthContext } from '../../contexts/AuthContext'
+
 const OrderScreen = () => {
 
     // const dismissKeyboard = () => {
@@ -12,6 +14,8 @@ const OrderScreen = () => {
 
     const {recipientName, recipientNumber, orderDetails, setRecipientName, setRecipientNumber, setOrderDetails, orders, setOrders,} = useOrderContext()
 
+    const {dbuser, sub}= useAuthContext()
+
     const [recipientNameError, setRecipientNameError] = useState('');
     const [recipientNumberError, setRecipientNumberError] = useState('');
 
@@ -19,7 +23,8 @@ const OrderScreen = () => {
 
     const goToReviewOrder = ()=>{
         let hasError = false;
-
+        
+        // !recipientName.trim() is if the space is empty
         if(!recipientName.trim()){
             setRecipientNameError('Kindly input the name of recipient.')
             hasError= true;
@@ -34,8 +39,11 @@ const OrderScreen = () => {
             setRecipientNumberError(" ")
         }
 
+        // if(!hasError){
+        //     navigation.navigate('SearchResults')
+        // }
         if(!hasError){
-            navigation.navigate('SearchResults')
+            navigation.navigate('ReviewOrder')
         }
     }
 
@@ -76,7 +84,8 @@ const OrderScreen = () => {
             placeholder='eg: Letter, Food, Clothes, Breakable Items etc. You can also drop a short note. Kindly make it as short as possible'
             />
             <Pressable 
-            onPress={goToReviewOrder}
+            // onPress={goToReviewOrder}
+            onPress={()=>console.log('this is sub: ',sub, 'this is dbuser: ', dbuser)}
             style={styles.btn}>
                 <Text style={styles.btnTxt}>
                     Done

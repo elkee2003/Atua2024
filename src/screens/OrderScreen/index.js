@@ -85,7 +85,7 @@ const OrderScreen = () => {
             />
             <Pressable 
             // onPress={goToReviewOrder}
-            onPress={()=>console.log('this is sub: ',sub, 'this is dbuser: ', dbuser)}
+            // onPress={()=>console.log('this is sub: ',sub, 'this is dbuser: ', dbuser)}
             style={styles.btn}>
                 <Text style={styles.btnTxt}>
                     Done
